@@ -1,3 +1,4 @@
+import { TeamProvider } from './context/TeamContext';
 import { Navbar } from './components/layout/Navbar';
 import { InkCanvasBackground } from './components/background/InkCanvasBackground';
 import { Hero } from './components/sections/Hero';
@@ -9,36 +10,42 @@ import { Certifications } from './components/sections/Certifications';
 import { Contact } from './components/sections/Contact';
 import { Footer } from './components/layout/Footer';
 import { ScrollDivider } from './components/common/ScrollDivider';
+import { TeammateCustomizerModal } from './components/team/TeammateCustomizerModal';
 
 export function App() {
   return (
-    <div className="relative min-h-screen bg-[#000000] text-white overflow-x-hidden selection:bg-white/20 selection:text-white">
-      {/* Animated Subtle Atmosphere Canvas */}
-      <InkCanvasBackground />
+    <TeamProvider>
+      <div className="relative min-h-screen bg-[#FAFAFA] text-zinc-900 overflow-x-hidden selection:bg-zinc-900 selection:text-white">
+        {/* Animated Subtle Atmosphere Light Canvas */}
+        <InkCanvasBackground />
 
-      {/* Floating Navigation Bar */}
-      <Navbar />
+        {/* Floating Navigation Bar with Teammate Switcher */}
+        <Navbar />
 
-      {/* Main Content Sections */}
-      <main className="relative z-10">
-        <Hero />
-        <ScrollDivider symbol="01" />
-        <About />
-        <ScrollDivider symbol="02" />
-        <Skills />
-        <ScrollDivider symbol="03" />
-        <Projects />
-        <ScrollDivider symbol="04" />
-        <Experience />
-        <ScrollDivider symbol="05" />
-        <Certifications />
-        <ScrollDivider symbol="06" />
-        <Contact />
-      </main>
+        {/* Main Content Sections */}
+        <main className="relative z-10">
+          <Hero />
+          <ScrollDivider symbol="01" />
+          <About />
+          <ScrollDivider symbol="02" />
+          <Skills />
+          <ScrollDivider symbol="03" />
+          <Projects />
+          <ScrollDivider symbol="04" />
+          <Experience />
+          <ScrollDivider symbol="05" />
+          <Certifications />
+          <ScrollDivider symbol="06" />
+          <Contact />
+        </main>
 
-      {/* Footer */}
-      <Footer />
-    </div>
+        {/* Footer */}
+        <Footer />
+
+        {/* Modal for Customizing Teammate Details */}
+        <TeammateCustomizerModal />
+      </div>
+    </TeamProvider>
   );
 }
 

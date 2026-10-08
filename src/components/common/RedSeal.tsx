@@ -9,7 +9,7 @@ interface RedSealProps {
 }
 
 export const RedSeal: React.FC<RedSealProps> = ({
-  char = 'NN',
+  char = 'SR',
   size = 'md',
   className = '',
   subtext,
@@ -25,21 +25,21 @@ export const RedSeal: React.FC<RedSealProps> = ({
   return (
     <div className={`inline-flex flex-col items-center ${className}`}>
       <div
-        className={`relative ${sizeClasses[size]} rounded-sm bg-[#0A0A0C] border-2 border-white shadow-lg flex items-center justify-center select-none font-serif font-black text-white transition-all duration-300 hover:scale-105 hover:border-white hover:shadow-white/20 ${
+        className={`relative ${sizeClasses[size]} rounded-sm bg-zinc-900 border-2 border-zinc-900 shadow-md flex items-center justify-center select-none font-serif font-black text-white transition-all duration-300 hover:scale-105 hover:shadow-lg ${
           rotate ? 'rotate-[-2deg]' : ''
         }`}
         style={{
-          boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.9), 0 3px 12px rgba(255, 255, 255, 0.1)'
+          boxShadow: 'inset 0 0 6px rgba(0, 0, 0, 0.4), 0 3px 10px rgba(0, 0, 0, 0.12)'
         }}
       >
         {/* Subtle dashed inner frame */}
         <div className="absolute inset-[2px] border border-dashed border-white/40 pointer-events-none rounded-[1px]" />
-        <span className="relative z-10 leading-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] uppercase">
+        <span className="relative z-10 leading-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)] uppercase">
           {char}
         </span>
       </div>
       {subtext && (
-        <span className="mt-1 font-mono text-[9px] tracking-widest text-[#A1A1AA] uppercase">
+        <span className="mt-1 font-mono text-[9px] tracking-widest text-zinc-500 uppercase">
           {subtext}
         </span>
       )}

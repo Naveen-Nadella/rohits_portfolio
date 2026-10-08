@@ -10,7 +10,7 @@ interface KanjiWatermarkProps {
 export const KanjiWatermark: React.FC<KanjiWatermarkProps> = ({
   char,
   position = 'top-right',
-  opacity = 0.025,
+  opacity = 0.035,
   className = ''
 }) => {
   const positionClasses = {
@@ -24,7 +24,7 @@ export const KanjiWatermark: React.FC<KanjiWatermarkProps> = ({
   return (
     <div
       aria-hidden="true"
-      className={`absolute select-none pointer-events-none font-serif font-black text-[100px] md:text-[200px] leading-none text-white ${positionClasses[position]} ${className}`}
+      className={`absolute select-none pointer-events-none font-serif font-black text-[100px] md:text-[200px] leading-none text-zinc-900 ${positionClasses[position]} ${className}`}
       style={{ opacity }}
     >
       {char}

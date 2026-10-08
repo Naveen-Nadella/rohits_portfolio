@@ -1,4 +1,4 @@
-﻿export interface Project {
+export interface Project {
   id: string;
   title: string;
   subtitle: string;
@@ -55,6 +55,13 @@ export interface Certification {
   credentialUrl?: string;
 }
 
+export interface EducationScorecard {
+  tenth: string;
+  intermediate: string;
+  btech: string;
+  university: string;
+}
+
 export interface PersonalInfo {
   name: string;
   monogram: string;
@@ -70,3 +77,10 @@ export interface PersonalInfo {
   cgpa: string;
   university: string;
 }
+
+export interface TeamMember extends PersonalInfo {
+  id: string;
+  scores: EducationScorecard;
+  photo?: string;
+}
+

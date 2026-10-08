@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { skillsData } from '../../data/skills';
@@ -32,8 +32,8 @@ export const Skills: React.FC = () => {
       });
 
   return (
-    <section id="skills" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#000000]">
-      <KanjiWatermark char="02" position="top-left" opacity={0.02} />
+    <section id="skills" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+      <KanjiWatermark char="02" position="top-left" opacity={0.03} />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeading
@@ -43,7 +43,7 @@ export const Skills: React.FC = () => {
           subtitle="Technical capabilities and computer science foundations cultivated through B.Tech coursework and hands-on web development."
         />
 
-        {/* Filter Navigation Tabs in Black & White */}
+        {/* Filter Navigation Tabs in Light Theme */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {categories.map((tab) => {
             const isActive = selectedCategory === tab.id;
@@ -54,11 +54,11 @@ export const Skills: React.FC = () => {
                 onClick={() => handleCategoryChange(tab.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-sm text-xs font-serif tracking-widest uppercase transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? 'bg-white text-black font-bold border border-white shadow-lg'
-                    : 'bg-[#09090B] text-[#A1A1AA] border border-white/15 hover:border-white/40 hover:text-white'
+                    ? 'bg-zinc-900 text-white font-bold border border-zinc-900 shadow-md'
+                    : 'bg-white text-zinc-600 border border-zinc-200 hover:border-zinc-400 hover:text-zinc-900 shadow-2xs'
                 }`}
               >
-                <TabIcon size={14} className={isActive ? 'text-black' : 'text-[#A1A1AA]'} />
+                <TabIcon size={14} className={isActive ? 'text-white' : 'text-zinc-500'} />
                 <span className="font-mono text-[10px] opacity-70">{tab.code}</span>
                 <span>{tab.label}</span>
               </button>
@@ -71,25 +71,25 @@ export const Skills: React.FC = () => {
           {filteredCategories.map((category, catIdx) => (
             <div
               key={catIdx}
-              className="bg-[#09090B] border border-white/15 rounded-sm p-6 sm:p-8 relative shadow-xl"
+              className="bg-white border border-zinc-200/90 rounded-sm p-6 sm:p-8 relative shadow-sm"
             >
               {/* Category Header */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-white/10">
+              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-6 border-b border-zinc-200">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-sm bg-[#121214] border border-white/40 flex items-center justify-center font-mono font-bold text-sm text-white">
+                  <div className="w-9 h-9 rounded-sm bg-zinc-900 text-white flex items-center justify-center font-mono font-bold text-sm shadow-xs">
                     {category.sealCode}
                   </div>
                   <div>
-                    <h3 className="font-serif text-lg sm:text-xl font-bold text-white tracking-wide">
+                    <h3 className="font-serif text-lg sm:text-xl font-bold text-zinc-900 tracking-wide">
                       {category.title}
                     </h3>
-                    <p className="text-xs text-[#A1A1AA] mt-0.5">
+                    <p className="text-xs text-zinc-500 mt-0.5">
                       {category.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="font-mono text-[11px] text-[#E4E4E7] tracking-wider uppercase bg-[#121214] px-3 py-1 rounded-sm border border-white/10">
+                <div className="font-mono text-[11px] text-zinc-700 tracking-wider uppercase bg-zinc-100 px-3 py-1 rounded-sm border border-zinc-200">
                   {category.skills.length} DISCIPLINARY TOOLS
                 </div>
               </div>
@@ -99,22 +99,22 @@ export const Skills: React.FC = () => {
                 {category.skills.map((skill, sIdx) => (
                   <div
                     key={sIdx}
-                    className="p-4 rounded-sm bg-[#121214] border border-white/10 hover:border-white/40 hover:bg-[#18181B] transition-all duration-300 group relative overflow-hidden"
+                    className="p-4 rounded-sm bg-zinc-50/70 border border-zinc-200 hover:border-zinc-400 hover:bg-white transition-all duration-300 group relative overflow-hidden shadow-2xs hover:shadow-xs"
                   >
                     {skill.featured && (
-                      <div className="absolute top-0 right-0 w-3 h-3 bg-gradient-to-bl from-white to-transparent" />
+                      <div className="absolute top-0 right-0 w-3 h-3 bg-gradient-to-bl from-zinc-900 to-transparent" />
                     )}
 
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <span className="font-serif text-sm sm:text-base font-bold text-white group-hover:text-white/90 transition-colors">
+                      <span className="font-serif text-sm sm:text-base font-bold text-zinc-900 group-hover:text-black transition-colors">
                         {skill.name}
                       </span>
-                      <span className="font-mono text-[10px] tracking-wider uppercase text-white/90 px-2 py-0.5 rounded-[1px] bg-[#000000] border border-white/20 whitespace-nowrap">
+                      <span className="font-mono text-[10px] tracking-wider uppercase text-zinc-800 px-2 py-0.5 rounded-[1px] bg-white border border-zinc-300 whitespace-nowrap shadow-2xs">
                         {skill.level}
                       </span>
                     </div>
 
-                    <p className="text-xs text-[#A1A1AA] leading-relaxed">
+                    <p className="text-xs text-zinc-600 leading-relaxed font-sans">
                       {skill.description}
                     </p>
                   </div>

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { RedSeal } from '../common/RedSeal';
@@ -18,8 +18,8 @@ export const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#000000]">
-      <KanjiWatermark char="03" position="top-right" opacity={0.02} />
+    <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+      <KanjiWatermark char="03" position="top-right" opacity={0.03} />
 
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeading
@@ -29,44 +29,44 @@ export const Projects: React.FC = () => {
           subtitle="Web applications, frontend architectures, and interactive digital experiences engineered with clean code and modern tooling."
         />
 
-        {/* Project Cards Grid in Black & White */}
+        {/* Project Cards Grid in Light Theme */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {projectsData.map((project) => (
             <div
               key={project.id}
-              className="bg-[#09090B] border border-white/15 hover:border-white/50 rounded-sm p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-black/90 group relative overflow-hidden"
+              className="bg-white border border-zinc-200/90 hover:border-zinc-400 rounded-sm p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group relative overflow-hidden shadow-xs"
             >
               {/* Top border thread highlight */}
-              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover:via-white transition-all" />
+              <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-zinc-900/40 to-transparent group-hover:via-zinc-900 transition-all" />
 
               <div>
                 {/* Header: Seal, Category, Featured Tag */}
                 <div className="flex items-center justify-between gap-3 mb-5">
                   <div className="flex items-center gap-3">
                     <RedSeal char={project.sealCode} size="sm" />
-                    <span className="font-mono text-[11px] text-[#E4E4E7] tracking-widest uppercase bg-[#121214] px-2.5 py-0.5 rounded-[1px] border border-white/15">
+                    <span className="font-mono text-[11px] text-zinc-700 tracking-widest uppercase bg-zinc-100 px-2.5 py-0.5 rounded-[1px] border border-zinc-200">
                       {project.category}
                     </span>
                   </div>
 
                   {project.featured && (
-                    <span className="flex items-center gap-1 font-serif text-[10px] text-black uppercase tracking-widest bg-white px-2 py-0.5 rounded-[1px] font-bold">
-                      <Sparkles size={10} className="text-black" />
+                    <span className="flex items-center gap-1 font-serif text-[10px] text-white uppercase tracking-widest bg-zinc-900 px-2 py-0.5 rounded-[1px] font-bold shadow-2xs">
+                      <Sparkles size={10} className="text-white" />
                       FEATURED
                     </span>
                   )}
                 </div>
 
                 {/* Title & Subtitle */}
-                <h3 className="font-serif text-xl sm:text-2xl font-bold text-white group-hover:text-white/90 transition-colors mb-1">
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-zinc-900 group-hover:text-black transition-colors mb-1">
                   {project.title}
                 </h3>
-                <p className="font-serif text-xs sm:text-sm text-[#A1A1AA] italic mb-4">
+                <p className="font-serif text-xs sm:text-sm text-zinc-500 italic mb-4">
                   {project.subtitle}
                 </p>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-[#A1A1AA] leading-relaxed mb-6 font-editorial">
+                <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed mb-6 font-editorial">
                   {project.description}
                 </p>
 
@@ -75,9 +75,9 @@ export const Projects: React.FC = () => {
                   {project.metrics.slice(0, 2).map((m, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1 text-[11px] font-mono text-white bg-[#121214] border border-white/15 px-2.5 py-1 rounded-[1px]"
+                      className="inline-flex items-center gap-1 text-[11px] font-mono text-zinc-900 bg-zinc-50 border border-zinc-200 px-2.5 py-1 rounded-[1px] font-semibold"
                     >
-                      <TrendingUp size={11} className="text-white" />
+                      <TrendingUp size={11} className="text-zinc-900" />
                       <span>{m}</span>
                     </span>
                   ))}
@@ -88,13 +88,13 @@ export const Projects: React.FC = () => {
                   {project.technologies.slice(0, 5).map((tech, idx) => (
                     <span
                       key={idx}
-                      className="text-[10px] font-mono text-[#A1A1AA] bg-[#121214] px-2 py-0.5 rounded-[1px] border border-white/10"
+                      className="text-[10px] font-mono text-zinc-600 bg-zinc-100 px-2 py-0.5 rounded-[1px] border border-zinc-200"
                     >
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 5 && (
-                    <span className="text-[10px] font-mono text-white bg-[#121214] px-1.5 py-0.5 rounded-[1px] border border-white/10">
+                    <span className="text-[10px] font-mono text-zinc-900 bg-zinc-200 px-1.5 py-0.5 rounded-[1px] border border-zinc-300 font-semibold">
                       +{project.technologies.length - 5}
                     </span>
                   )}
@@ -102,13 +102,13 @@ export const Projects: React.FC = () => {
               </div>
 
               {/* Bottom Actions */}
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between gap-3">
+              <div className="pt-4 border-t border-zinc-200 flex items-center justify-between gap-3">
                 <button
                   onClick={() => openProjectModal(project)}
-                  className="inline-flex items-center gap-2 text-xs font-serif tracking-widest uppercase font-bold text-white hover:text-white/80 transition-colors cursor-pointer group/btn"
+                  className="inline-flex items-center gap-2 text-xs font-serif tracking-widest uppercase font-bold text-zinc-900 hover:text-black transition-colors cursor-pointer group/btn"
                 >
                   <span>INSPECT ARTIFACT</span>
-                  <ArrowRight size={14} className="text-white group-hover/btn:translate-x-1 transition-transform" />
+                  <ArrowRight size={14} className="text-zinc-900 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
 
                 <div className="flex items-center gap-2">
@@ -117,7 +117,7 @@ export const Projects: React.FC = () => {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-sm bg-[#121214] border border-white/15 text-[#A1A1AA] hover:text-white hover:border-white transition-all"
+                      className="p-2 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-400 transition-all shadow-2xs"
                       title="Inspect GitHub Repository"
                       aria-label="GitHub Repository"
                     >
@@ -129,7 +129,7 @@ export const Projects: React.FC = () => {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-sm bg-[#121214] border border-white/15 text-[#A1A1AA] hover:text-white hover:border-white transition-all"
+                      className="p-2 rounded-sm bg-zinc-50 border border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-zinc-400 transition-all shadow-2xs"
                       title="Live Demo"
                       aria-label="Live Demo"
                     >

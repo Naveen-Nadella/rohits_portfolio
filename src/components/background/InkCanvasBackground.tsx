@@ -50,47 +50,47 @@ export const InkCanvasBackground: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    // Monochrome Ink & Ash Particles
-    const particleCount = Math.min(32, Math.floor(width / 40));
+    // Light Theme: Delicate Soft Ink & Ash Mote Particles
+    const particleCount = Math.min(30, Math.floor(width / 45));
     const particles: Particle[] = [];
-    const colors = ['#FFFFFF', '#E4E4E7', '#A1A1AA', '#52525B'];
+    const colors = ['#18181B', '#3F3F46', '#71717A', '#A1A1AA', '#CBD5E1'];
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.2 + 0.1,
-        vy: -0.15 - Math.random() * 0.3,
-        size: Math.random() * 1.8 + 0.6,
-        alpha: Math.random() * 0.25 + 0.05,
-        maxAlpha: Math.random() * 0.3 + 0.08,
+        vx: (Math.random() - 0.5) * 0.2 + 0.08,
+        vy: -0.15 - Math.random() * 0.25,
+        size: Math.random() * 1.6 + 0.6,
+        alpha: Math.random() * 0.12 + 0.03,
+        maxAlpha: Math.random() * 0.15 + 0.05,
         color: colors[Math.floor(Math.random() * colors.length)]
       });
     }
 
-    // Monochrome drifting leaf silhouettes
-    const leafCount = Math.min(12, Math.max(5, Math.floor(width / 140)));
+    // Light Theme: Drifting Minimalist Ink Wash Silhouette Leaves
+    const leafCount = Math.min(10, Math.max(4, Math.floor(width / 160)));
     const leaves: Leaf[] = [];
-    const monochromeLeafColors = ['#E4E4E7', '#A1A1AA', '#71717A', '#3F3F46', '#27272A'];
+    const monochromeLeafColors = ['#52525B', '#71717A', '#A1A1AA', '#CBD5E1'];
 
     for (let i = 0; i < leafCount; i++) {
       leaves.push({
         x: Math.random() * width,
         y: Math.random() * height - height,
-        vx: (Math.random() - 0.5) * 0.4 + 0.2,
-        vy: 0.4 + Math.random() * 0.7,
-        size: Math.random() * 6 + 7,
+        vx: (Math.random() - 0.5) * 0.35 + 0.15,
+        vy: 0.35 + Math.random() * 0.5,
+        size: Math.random() * 5 + 6,
         rotation: Math.random() * Math.PI * 2,
         rotationSpeed: (Math.random() - 0.5) * 0.02,
         swaySpeed: 0.015 + Math.random() * 0.02,
         swayOffset: Math.random() * Math.PI * 2,
-        swayAmplitude: 15 + Math.random() * 20,
+        swayAmplitude: 14 + Math.random() * 18,
         color: monochromeLeafColors[Math.floor(Math.random() * monochromeLeafColors.length)],
-        alpha: 0.2 + Math.random() * 0.25
+        alpha: 0.08 + Math.random() * 0.12
       });
     }
 
-    // Draw stylized leaf path
+    // Draw stylized minimalist leaf path
     const drawMonochromeLeaf = (
       context: CanvasRenderingContext2D,
       x: number,
@@ -118,8 +118,8 @@ export const InkCanvasBackground: React.FC = () => {
       context.fill();
 
       // Subtle leaf spine line
-      context.strokeStyle = '#000000';
-      context.lineWidth = 0.6;
+      context.strokeStyle = 'rgba(0, 0, 0, 0.2)';
+      context.lineWidth = 0.5;
       context.beginPath();
       context.moveTo(0, size * 0.5);
       context.lineTo(0, size * 1.1);
@@ -212,19 +212,19 @@ export const InkCanvasBackground: React.FC = () => {
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-60"
+        className="absolute inset-0 w-full h-full opacity-70"
       />
 
-      {/* Monochrome Silhouette (Distant mountain peaks & architecture) */}
-      <div className="absolute bottom-0 inset-x-0 h-44 md:h-64 opacity-[0.09] select-none">
+      {/* Light Theme: Subtle Ink Wash Silhouette (Distant mountain peaks & architecture) */}
+      <div className="absolute bottom-0 inset-x-0 h-44 md:h-64 opacity-[0.035] select-none text-zinc-900 pointer-events-none">
         <svg
           viewBox="0 0 1440 320"
           preserveAspectRatio="none"
-          className="w-full h-full text-white fill-current"
+          className="w-full h-full fill-current"
         >
           <path d="M0,288L60,260C120,232,240,176,360,180C480,184,600,248,720,240C840,232,960,152,1080,156C1200,160,1320,248,1380,292L1440,320L1440,320L0,320Z" fillOpacity="0.5" />
           
-          <g transform="translate(1120, 110) scale(0.65)" fill="#FFFFFF" fillOpacity="0.4">
+          <g transform="translate(1120, 110) scale(0.65)" fill="currentColor" fillOpacity="0.6">
             <rect x="73" y="10" width="4" height="40" />
             <circle cx="75" cy="18" r="5" />
             <path d="M20,60 Q75,45 130,60 L115,75 Q75,70 35,75 Z" />
@@ -241,8 +241,8 @@ export const InkCanvasBackground: React.FC = () => {
         </svg>
       </div>
 
-      {/* Vignette fade to pure black */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#000000] via-[#000000]/80 to-transparent" />
+      {/* Vignette fade to clean white/cream base */}
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/80 to-transparent" />
     </div>
   );
 };
