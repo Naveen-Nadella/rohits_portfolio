@@ -81,32 +81,5 @@ export const teamMembersData: TeamMember[] = [
       'Passionate about foundational computer science principles, database modeling, object-oriented systems, and scalable application development.',
       'Focused on crafting clean, testable code and collaborating within engineering teams to develop impactful software products.'
     ]
-  },
-  {
-    id: 'teammate-4',
-    name: 'Teammate 04',
-    monogram: 'T4',
-    title: 'Software Engineer & Cloud Architect',
-    subtitle: 'B.Tech in Computer Science & Engineering • 2nd Year',
-    tagline: 'Passionate about cloud systems, API integrations, and collaborative modern software engineering.',
-    email: 'teammate4@klu.ac.in',
-    phone: '+91 98765 43211',
-    location: 'India',
-    github: 'https://github.com',
-    linkedin: 'https://linkedin.com',
-    cgpa: 'Pending / 10.0',
-    university: 'KL University',
-    photo: '',
-    scores: {
-      tenth: 'Pending',
-      intermediate: 'Pending',
-      btech: 'Pending',
-      university: 'KL University'
-    },
-    bio: [
-      'B.Tech 2nd Year Computer Science & Engineering undergraduate at KL University focusing on modern web stacks, distributed systems, and collaborative development.',
-      'Exploring continuous integration, containerization, and modern frontend frameworks.',
-      'Profile ready for custom updates and photographic archive.'
-    ]
   }
 ];

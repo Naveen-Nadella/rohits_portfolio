@@ -116,7 +116,7 @@ export const TeammateCustomizerModal: React.FC = () => {
                 Customize Teammate Details
               </h2>
               <p className="text-xs text-zinc-500 font-sans">
-                Tailor credentials, contact channels, and photographs for all 4 team members
+                Tailor credentials, contact channels, and photographs for all 3 team members
               </p>
             </div>
           </div>

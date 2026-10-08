@@ -15,8 +15,8 @@ interface TeamContextType {
   resetAllMembers: () => void;
 }
 
-const LOCAL_STORAGE_KEY = 'portfolio_team_members_v3';
-const ACTIVE_MEMBER_KEY = 'portfolio_active_member_v3';
+const LOCAL_STORAGE_KEY = 'portfolio_team_members_v5';
+const ACTIVE_MEMBER_KEY = 'portfolio_active_member_v5';
 
 const TeamContext = createContext<TeamContextType | undefined>(undefined);
 
