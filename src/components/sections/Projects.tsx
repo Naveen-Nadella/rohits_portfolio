@@ -18,7 +18,7 @@ export const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+    <section id="projects" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#F1F1EE]/80 border-y border-zinc-300/40 backdrop-blur-xs">
       <KanjiWatermark char="03" position="top-right" opacity={0.03} />
 
       <div className="max-w-7xl mx-auto relative z-10">

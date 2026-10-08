@@ -71,7 +71,7 @@ export const Navbar: React.FC = () => {
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'py-2.5 bg-white/90 backdrop-blur-md border-b border-zinc-200/90 shadow-sm'
+            ? 'py-2.5 bg-[#EDEDE9]/92 backdrop-blur-md border-b border-zinc-300/80 shadow-xs'
             : 'py-4 bg-transparent'
         }`}
       >
@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-zinc-100/90 border border-zinc-200/90 rounded-full px-3 py-1.5 backdrop-blur-md">
+          <nav className="hidden lg:flex items-center gap-1 bg-zinc-200/80 border border-zinc-300/80 rounded-full px-3 py-1.5 backdrop-blur-md">
             {navItems.map((item) => {
               const isActive = activeSection === item.id;
               return (

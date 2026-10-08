@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-zinc-100 border-t border-zinc-200 py-16 px-4 sm:px-6 lg:px-8 text-zinc-600 overflow-hidden">
+    <footer className="relative bg-[#E1E1DD] border-t border-zinc-300/80 py-16 px-4 sm:px-6 lg:px-8 text-zinc-600 overflow-hidden">
       {/* Background seal watermark */}
       <div
         aria-hidden="true"

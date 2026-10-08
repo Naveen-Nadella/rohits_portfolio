@@ -15,14 +15,14 @@ import { TeammateCustomizerModal } from './components/team/TeammateCustomizerMod
 export function App() {
   return (
     <TeamProvider>
-      <div className="relative min-h-screen bg-[#FAFAFA] text-zinc-900 overflow-x-hidden selection:bg-zinc-900 selection:text-white">
-        {/* Animated Subtle Atmosphere Light Canvas */}
+      <div className="relative min-h-screen bg-[#EAEAE7] text-[#0F172A] overflow-x-hidden selection:bg-slate-900 selection:text-white">
+        {/* Animated Tech Constellation & Developer Blueprint Atmosphere */}
         <InkCanvasBackground />
 
         {/* Floating Navigation Bar with Teammate Switcher */}
         <Navbar />
 
-        {/* Main Content Sections */}
+        {/* Main Content Sections with Sophisticated Shaded Depth */}
         <main className="relative z-10">
           <Hero />
           <ScrollDivider symbol="01" />
@@ -39,7 +39,7 @@ export function App() {
           <Contact />
         </main>
 
-        {/* Footer */}
+        {/* Shaded Footer */}
         <Footer />
 
         {/* Modal for Customizing Teammate Details */}

@@ -1,29 +1,26 @@
 import React, { useEffect, useRef } from 'react';
 
-interface Particle {
+interface ParticleNode {
   x: number;
   y: number;
   vx: number;
   vy: number;
-  size: number;
-  alpha: number;
-  maxAlpha: number;
+  radius: number;
   color: string;
+  alpha: number;
 }
 
-interface Leaf {
+interface CodeGlyph {
+  text: string;
   x: number;
   y: number;
   vx: number;
   vy: number;
   size: number;
-  rotation: number;
-  rotationSpeed: number;
+  alpha: number;
   swaySpeed: number;
   swayOffset: number;
-  swayAmplitude: number;
-  color: string;
-  alpha: number;
+  swayAmp: number;
 }
 
 export const InkCanvasBackground: React.FC = () => {
@@ -35,12 +32,30 @@ export const InkCanvasBackground: React.FC = () => {
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    // Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let animationFrameId: number;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+
+    // Mouse coordinates for interactive developer network
+    const mouse = {
+      x: -1000,
+      y: -1000,
+      active: false
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
+    };
+
+    const handleMouseLeave = () => {
+      mouse.active = false;
+      mouse.x = -1000;
+      mouse.y = -1000;
+    };
 
     const handleResize = () => {
       if (!canvas) return;
@@ -49,140 +64,137 @@ export const InkCanvasBackground: React.FC = () => {
     };
 
     window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseleave', handleMouseLeave);
 
-    // Light Theme: Delicate Soft Ink & Ash Mote Particles
-    const particleCount = Math.min(30, Math.floor(width / 45));
-    const particles: Particle[] = [];
-    const colors = ['#18181B', '#3F3F46', '#71717A', '#A1A1AA', '#CBD5E1'];
+    // Portfolio Tech Glyphs / Code Tokens
+    const codeTokens = [
+      '</>', '{ }', '=>', 'const', '0101', 'git', 'fn()',
+      '[]', 'async', 'return', '<div/>', 'API', 'SQL',
+      'npm', 'state', 'λ', 'true', 'interface'
+    ];
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
+    const glyphs: CodeGlyph[] = [];
+    const glyphCount = Math.min(18, Math.max(8, Math.floor(width / 95)));
+
+    for (let i = 0; i < glyphCount; i++) {
+      glyphs.push({
+        text: codeTokens[i % codeTokens.length],
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.2 + 0.08,
+        vx: (Math.random() - 0.5) * 0.25,
         vy: -0.15 - Math.random() * 0.25,
-        size: Math.random() * 1.6 + 0.6,
-        alpha: Math.random() * 0.12 + 0.03,
-        maxAlpha: Math.random() * 0.15 + 0.05,
-        color: colors[Math.floor(Math.random() * colors.length)]
-      });
-    }
-
-    // Light Theme: Drifting Minimalist Ink Wash Silhouette Leaves
-    const leafCount = Math.min(10, Math.max(4, Math.floor(width / 160)));
-    const leaves: Leaf[] = [];
-    const monochromeLeafColors = ['#52525B', '#71717A', '#A1A1AA', '#CBD5E1'];
-
-    for (let i = 0; i < leafCount; i++) {
-      leaves.push({
-        x: Math.random() * width,
-        y: Math.random() * height - height,
-        vx: (Math.random() - 0.5) * 0.35 + 0.15,
-        vy: 0.35 + Math.random() * 0.5,
-        size: Math.random() * 5 + 6,
-        rotation: Math.random() * Math.PI * 2,
-        rotationSpeed: (Math.random() - 0.5) * 0.02,
+        size: Math.floor(Math.random() * 3) + 11,
+        alpha: Math.random() * 0.12 + 0.08,
         swaySpeed: 0.015 + Math.random() * 0.02,
         swayOffset: Math.random() * Math.PI * 2,
-        swayAmplitude: 14 + Math.random() * 18,
-        color: monochromeLeafColors[Math.floor(Math.random() * monochromeLeafColors.length)],
-        alpha: 0.08 + Math.random() * 0.12
+        swayAmp: 12 + Math.random() * 15
       });
     }
 
-    // Draw stylized minimalist leaf path
-    const drawMonochromeLeaf = (
-      context: CanvasRenderingContext2D,
-      x: number,
-      y: number,
-      size: number,
-      rot: number,
-      color: string,
-      alpha: number
-    ) => {
-      context.save();
-      context.translate(x, y);
-      context.rotate(rot);
-      context.globalAlpha = alpha;
-      context.fillStyle = color;
+    // Interactive Constellation Network Nodes
+    const nodeCount = Math.min(48, Math.max(22, Math.floor(width / 42)));
+    const nodes: ParticleNode[] = [];
+    const nodeColors = ['#1E293B', '#334155', '#475569', '#64748B'];
 
-      context.beginPath();
-      context.moveTo(0, -size);
-      context.quadraticCurveTo(size * 0.3, -size * 0.6, size * 0.8, -size * 0.3);
-      context.quadraticCurveTo(size * 0.4, 0, size * 0.9, size * 0.4);
-      context.quadraticCurveTo(size * 0.3, size * 0.5, 0, size * 0.9);
-      context.quadraticCurveTo(-size * 0.3, size * 0.5, -size * 0.9, size * 0.4);
-      context.quadraticCurveTo(-size * 0.4, 0, -size * 0.8, -size * 0.3);
-      context.quadraticCurveTo(-size * 0.3, -size * 0.6, 0, -size);
-      context.closePath();
-      context.fill();
-
-      // Subtle leaf spine line
-      context.strokeStyle = 'rgba(0, 0, 0, 0.2)';
-      context.lineWidth = 0.5;
-      context.beginPath();
-      context.moveTo(0, size * 0.5);
-      context.lineTo(0, size * 1.1);
-      context.stroke();
-
-      context.restore();
-    };
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.45,
+        vy: (Math.random() - 0.5) * 0.45,
+        radius: Math.random() * 1.5 + 1.2,
+        color: nodeColors[Math.floor(Math.random() * nodeColors.length)],
+        alpha: Math.random() * 0.35 + 0.25
+      });
+    }
 
     let tick = 0;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
+      tick++;
 
-      // Render drifting particles
-      particles.forEach((p) => {
-        if (!prefersReducedMotion) {
-          p.x += p.vx;
-          p.y += p.vy;
+      // 1. Draw Connected Tech Constellation Lines
+      const maxConnectDist = Math.min(125, width / 10);
+      const mouseConnectDist = 150;
 
-          if (p.y < -10) {
-            p.y = height + 10;
-            p.x = Math.random() * width;
-          }
-          if (p.x > width + 10) {
-            p.x = -10;
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < maxConnectDist) {
+            const lineAlpha = (1 - dist / maxConnectDist) * 0.14;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(51, 65, 85, ${lineAlpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            ctx.stroke();
           }
         }
 
+        // Mouse interactive connection
+        if (mouse.active) {
+          const mdx = nodes[i].x - mouse.x;
+          const mdy = nodes[i].y - mouse.y;
+          const mDist = Math.hypot(mdx, mdy);
+
+          if (mDist < mouseConnectDist) {
+            const mAlpha = (1 - mDist / mouseConnectDist) * 0.28;
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(15, 23, 42, ${mAlpha})`;
+            ctx.lineWidth = 1;
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 2. Draw Network Nodes
+      nodes.forEach((n) => {
+        if (!prefersReducedMotion) {
+          n.x += n.vx;
+          n.y += n.vy;
+
+          if (n.x < -10) n.x = width + 10;
+          if (n.x > width + 10) n.x = -10;
+          if (n.y < -10) n.y = height + 10;
+          if (n.y > height + 10) n.y = -10;
+        }
+
         ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
+        ctx.globalAlpha = n.alpha;
+        ctx.fillStyle = n.color;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       });
 
-      // Render leaves
-      tick += 1;
-      leaves.forEach((leaf) => {
+      // 3. Draw Floating Developer Code Glyphs
+      glyphs.forEach((g) => {
         if (!prefersReducedMotion) {
-          leaf.y += leaf.vy;
-          leaf.x += leaf.vx + Math.sin(tick * leaf.swaySpeed + leaf.swayOffset) * 0.5;
-          leaf.rotation += leaf.rotationSpeed;
+          g.y += g.vy;
+          g.x += g.vx + Math.sin(tick * g.swaySpeed + g.swayOffset) * 0.25;
 
-          if (leaf.y > height + 30) {
-            leaf.y = -30;
-            leaf.x = Math.random() * width;
+          if (g.y < -30) {
+            g.y = height + 20;
+            g.x = Math.random() * width;
           }
-          if (leaf.x > width + 30) {
-            leaf.x = -30;
-          }
+          if (g.x < -30) g.x = width + 20;
+          if (g.x > width + 30) g.x = -20;
         }
 
-        drawMonochromeLeaf(
-          ctx,
-          leaf.x,
-          leaf.y,
-          leaf.size,
-          leaf.rotation,
-          leaf.color,
-          leaf.alpha
-        );
+        ctx.save();
+        ctx.globalAlpha = g.alpha;
+        ctx.font = `600 ${g.size}px 'JetBrains Mono', monospace`;
+        ctx.fillStyle = '#334155';
+        ctx.fillText(g.text, g.x, g.y);
+        ctx.restore();
       });
 
       if (!prefersReducedMotion) {
@@ -203,6 +215,8 @@ export const InkCanvasBackground: React.FC = () => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibility);
       cancelAnimationFrame(animationFrameId);
     };
@@ -210,39 +224,28 @@ export const InkCanvasBackground: React.FC = () => {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full opacity-70"
+      {/* Soft Shaded Ambient Vignette & Depth Orbs (Eliminates Glare) */}
+      <div className="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-slate-300/35 blur-3xl" />
+      <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-amber-200/20 blur-3xl" />
+      <div className="absolute -bottom-40 left-1/4 w-[640px] h-[640px] rounded-full bg-stone-300/35 blur-3xl" />
+
+      {/* Engineering Blueprint Fine Dot Grid Overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.45]"
+        style={{
+          backgroundImage: 'radial-gradient(rgba(30, 41, 59, 0.12) 1.2px, transparent 1.2px)',
+          backgroundSize: '24px 24px'
+        }}
       />
 
-      {/* Light Theme: Subtle Ink Wash Silhouette (Distant mountain peaks & architecture) */}
-      <div className="absolute bottom-0 inset-x-0 h-44 md:h-64 opacity-[0.035] select-none text-zinc-900 pointer-events-none">
-        <svg
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-          className="w-full h-full fill-current"
-        >
-          <path d="M0,288L60,260C120,232,240,176,360,180C480,184,600,248,720,240C840,232,960,152,1080,156C1200,160,1320,248,1380,292L1440,320L1440,320L0,320Z" fillOpacity="0.5" />
-          
-          <g transform="translate(1120, 110) scale(0.65)" fill="currentColor" fillOpacity="0.6">
-            <rect x="73" y="10" width="4" height="40" />
-            <circle cx="75" cy="18" r="5" />
-            <path d="M20,60 Q75,45 130,60 L115,75 Q75,70 35,75 Z" />
-            <rect x="55" y="75" width="40" height="20" />
-            <path d="M10,105 Q75,90 140,105 L125,120 Q75,115 25,120 Z" />
-            <rect x="50" y="120" width="50" height="25" />
-            <path d="M0,155 Q75,140 150,155 L135,175 Q75,170 15,175 Z" />
-            <rect x="40" y="175" width="70" height="35" />
-            <rect x="30" y="210" width="90" height="40" />
-          </g>
+      {/* Interactive Developer Constellation & Code Glyphs Canvas */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 w-full h-full"
+      />
 
-          <path d="M140,320 L150,220 L160,320 Z M130,270 L150,230 L170,270 Z" fillOpacity="0.6" />
-          <path d="M180,320 L190,240 L200,320 Z M172,285 L190,250 L208,285 Z" fillOpacity="0.6" />
-        </svg>
-      </div>
-
-      {/* Vignette fade to clean white/cream base */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#FAFAFA] via-[#FAFAFA]/80 to-transparent" />
+      {/* Bottom Shaded Elevation Gradient */}
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#EAEAE7] via-[#EAEAE7]/60 to-transparent" />
     </div>
   );
 };

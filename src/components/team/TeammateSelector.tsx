@@ -115,9 +115,9 @@ export const TeammateSegmentedBar: React.FC = () => {
   const { activeMember, allMembers, setActiveMemberId, openCustomizer } = useTeam();
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-6 p-1.5 bg-white/90 backdrop-blur-md border border-zinc-200/90 rounded-sm shadow-sm flex flex-wrap items-center justify-between gap-2">
-      <div className="flex items-center gap-1.5 px-2 text-[11px] font-mono uppercase tracking-wider text-zinc-400">
-        <Users size={13} className="text-zinc-700" />
+    <div className="w-full max-w-4xl mx-auto my-6 p-1.5 bg-[#F4F4F1]/95 backdrop-blur-md border border-zinc-300/80 rounded-sm shadow-xs flex flex-wrap items-center justify-between gap-2">
+      <div className="flex items-center gap-1.5 px-2 text-[11px] font-mono uppercase tracking-wider text-zinc-500 font-semibold">
+        <Users size={13} className="text-zinc-800" />
         <span className="hidden sm:inline">TEAM PORTFOLIO:</span>
       </div>
 
@@ -134,7 +134,7 @@ export const TeammateSegmentedBar: React.FC = () => {
               className={`px-3 py-1.5 rounded-sm text-xs font-serif tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
                 isActive
                   ? 'bg-zinc-900 text-white font-bold shadow-xs'
-                  : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700 border border-zinc-200/80 hover:text-zinc-900'
+                  : 'bg-[#EAEAE7] hover:bg-white text-zinc-700 border border-zinc-300 hover:text-zinc-900'
               }`}
             >
               <span className="font-mono text-[10px] opacity-70">{member.monogram}</span>

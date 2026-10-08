@@ -7,7 +7,7 @@ import { ExternalLink, ShieldCheck, Award } from 'lucide-react';
 
 export const Certifications: React.FC = () => {
   return (
-    <section id="certifications" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+    <section id="certifications" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#F1F1EE]/80 border-y border-zinc-300/40 backdrop-blur-xs">
       <KanjiWatermark char="05" position="top-right" opacity={0.03} />
 
       <div className="max-w-4xl mx-auto relative z-10">

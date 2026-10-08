@@ -36,7 +36,7 @@ export const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+    <section id="about" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#F1F1EE]/80 border-y border-zinc-300/40 backdrop-blur-xs">
       <KanjiWatermark char="01" position="top-right" opacity={0.03} />
 
       <div className="max-w-7xl mx-auto relative z-10">

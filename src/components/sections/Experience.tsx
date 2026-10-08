@@ -22,7 +22,7 @@ export const Experience: React.FC = () => {
   };
 
   return (
-    <section id="journey" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+    <section id="journey" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <KanjiWatermark char="04" position="top-left" opacity={0.03} />
 
       <div className="max-w-5xl mx-auto relative z-10">

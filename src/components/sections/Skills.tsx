@@ -32,7 +32,7 @@ export const Skills: React.FC = () => {
       });
 
   return (
-    <section id="skills" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+    <section id="skills" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <KanjiWatermark char="02" position="top-left" opacity={0.03} />
 
       <div className="max-w-7xl mx-auto relative z-10">

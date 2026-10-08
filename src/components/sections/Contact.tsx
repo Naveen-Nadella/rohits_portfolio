@@ -37,7 +37,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#FAFAFA]">
+    <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-transparent">
       <KanjiWatermark char="06" position="top-left" opacity={0.03} />
 
       <div className="max-w-6xl mx-auto relative z-10">
