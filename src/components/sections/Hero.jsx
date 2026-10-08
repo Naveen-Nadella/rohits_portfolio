@@ -4,12 +4,12 @@ import { useTeam } from '../../context/TeamContext';
 import { TeammateSegmentedBar } from '../team/TeammateSelector';
 import { soundEngine } from '../../utils/audio';
 import { GithubIcon, LinkedinIcon } from '../common/SocialIcons';
-import { Mail, Phone, Award, ArrowUpRight, Code2, Camera, Sparkles } from 'lucide-react';
+import { Mail, Phone, Award, ArrowUpRight, Code2, Camera } from 'lucide-react';
 
-export const Hero: React.FC = () => {
+export const Hero = () => {
   const { activeMember, openCustomizer } = useTeam();
 
-  const handleScrollTo = (id: string) => {
+  const handleScrollTo = (id) => {
     soundEngine.playBrushSwipe();
     const el = document.getElementById(id);
     if (el) {
@@ -269,7 +269,7 @@ export const Hero: React.FC = () => {
                 Full-Stack & Web Dev
               </div>
               <div className="text-[9px] font-mono text-zinc-500 mt-0.5">
-                REACT • TYPESCRIPT • JAVA
+                REACT • JAVASCRIPT • JAVA
               </div>
             </div>
 

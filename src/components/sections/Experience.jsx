@@ -5,10 +5,10 @@ import { experienceData } from '../../data/experience';
 import { useTeam } from '../../context/TeamContext';
 import { Briefcase, GraduationCap, Calendar, CheckCircle } from 'lucide-react';
 
-export const Experience: React.FC = () => {
+export const Experience = () => {
   const { activeMember } = useTeam();
 
-  const getDynamicGrade = (itemId: string, defaultGrade?: string) => {
+  const getDynamicGrade = (itemId, defaultGrade) => {
     if (itemId === 'kl-university-btech') {
       return `CGPA: ${activeMember.scores.btech}`;
     }

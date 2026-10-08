@@ -1,13 +1,6 @@
 import React from 'react';
 
-interface KanjiWatermarkProps {
-  char: string;
-  position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center';
-  opacity?: number;
-  className?: string;
-}
-
-export const KanjiWatermark: React.FC<KanjiWatermarkProps> = ({
+export const KanjiWatermark = ({
   char,
   position = 'top-right',
   opacity = 0.035,

@@ -1,11 +1,6 @@
 import React from 'react';
 
-interface IconProps {
-  size?: number;
-  className?: string;
-}
-
-export const GithubIcon: React.FC<IconProps> = ({ size = 16, className = '' }) => (
+export const GithubIcon = ({ size = 16, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -24,7 +19,7 @@ export const GithubIcon: React.FC<IconProps> = ({ size = 16, className = '' }) =
   </svg>
 );
 
-export const LinkedinIcon: React.FC<IconProps> = ({ size = 16, className = '' }) => (
+export const LinkedinIcon = ({ size = 16, className = '' }) => (
   <svg
     width={size}
     height={size}

@@ -7,7 +7,7 @@ import { soundEngine } from '../../utils/audio';
 import { GithubIcon, LinkedinIcon } from '../common/SocialIcons';
 import { Mail, Phone, Send, Sparkles } from 'lucide-react';
 
-export const Contact: React.FC = () => {
+export const Contact = () => {
   const { activeMember } = useTeam();
   const [formData, setFormData] = useState({
     name: '',
@@ -18,12 +18,12 @@ export const Contact: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     soundEngine.playChime(396, 1.2);

@@ -1,3 +1,4 @@
+import React from 'react';
 import { TeamProvider } from './context/TeamContext';
 import { Navbar } from './components/layout/Navbar';
 import { InkCanvasBackground } from './components/background/InkCanvasBackground';

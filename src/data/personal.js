@@ -1,6 +1,4 @@
-﻿import type { PersonalInfo } from '../types/portfolio';
-
-export const personalData: PersonalInfo = {
+export const personalData = {
   name: "Sanniwada Rohit",
   monogram: "SR",
   title: "Software Engineer & Web Developer",

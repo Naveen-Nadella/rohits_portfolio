@@ -1,15 +1,7 @@
 import React from 'react';
 import { RedSeal } from './RedSeal';
 
-interface SectionHeadingProps {
-  sealCode?: string;
-  chapterNumber?: string;
-  title: string;
-  subtitle: string;
-  centered?: boolean;
-}
-
-export const SectionHeading: React.FC<SectionHeadingProps> = ({
+export const SectionHeading = ({
   sealCode = '01',
   chapterNumber,
   title,

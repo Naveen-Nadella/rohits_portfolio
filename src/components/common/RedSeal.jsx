@@ -1,14 +1,6 @@
 import React from 'react';
 
-interface RedSealProps {
-  char?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  className?: string;
-  subtext?: string;
-  rotate?: boolean;
-}
-
-export const RedSeal: React.FC<RedSealProps> = ({
+export const RedSeal = ({
   char = 'SR',
   size = 'md',
   className = '',
@@ -25,7 +17,7 @@ export const RedSeal: React.FC<RedSealProps> = ({
   return (
     <div className={`inline-flex flex-col items-center ${className}`}>
       <div
-        className={`relative ${sizeClasses[size]} rounded-sm bg-zinc-900 border-2 border-zinc-900 shadow-md flex items-center justify-center select-none font-serif font-black text-white transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+        className={`relative ${sizeClasses[size] || sizeClasses.md} rounded-sm bg-zinc-900 border-2 border-zinc-900 shadow-md flex items-center justify-center select-none font-serif font-black text-white transition-all duration-300 hover:scale-105 hover:shadow-lg ${
           rotate ? 'rotate-[-2deg]' : ''
         }`}
         style={{

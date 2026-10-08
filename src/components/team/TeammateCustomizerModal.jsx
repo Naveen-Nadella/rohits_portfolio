@@ -3,7 +3,7 @@ import { useTeam } from '../../context/TeamContext';
 import { X, Check, RotateCcw, UserCheck, Sparkles, GraduationCap, Phone, Mail, Link as LinkIcon, Image as ImageIcon } from 'lucide-react';
 import { soundEngine } from '../../utils/audio';
 
-export const TeammateCustomizerModal: React.FC = () => {
+export const TeammateCustomizerModal = () => {
   const {
     isCustomizerOpen,
     closeCustomizer,
@@ -15,7 +15,7 @@ export const TeammateCustomizerModal: React.FC = () => {
     resetAllMembers
   } = useTeam();
 
-  const [selectedId, setSelectedId] = useState<string>(customizingMemberId || activeMemberId);
+  const [selectedId, setSelectedId] = useState(customizingMemberId || activeMemberId);
   const [formData, setFormData] = useState({
     name: '',
     monogram: '',
@@ -47,9 +47,9 @@ export const TeammateCustomizerModal: React.FC = () => {
         title: currentMember.title,
         email: currentMember.email,
         phone: currentMember.phone,
-        tenth: currentMember.scores.tenth,
-        intermediate: currentMember.scores.intermediate,
-        btech: currentMember.scores.btech,
+        tenth: currentMember.scores?.tenth || '',
+        intermediate: currentMember.scores?.intermediate || '',
+        btech: currentMember.scores?.btech || '',
         photo: currentMember.photo || '',
         github: currentMember.github || '',
         linkedin: currentMember.linkedin || ''
@@ -59,12 +59,12 @@ export const TeammateCustomizerModal: React.FC = () => {
 
   if (!isCustomizerOpen) return null;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = (e) => {
     e.preventDefault();
     soundEngine.playChime(660, 0.8);
     updateMember(selectedId, {
@@ -116,7 +116,7 @@ export const TeammateCustomizerModal: React.FC = () => {
                 Customize Teammate Details
               </h2>
               <p className="text-xs text-zinc-500 font-sans">
-                Tailor credentials, contact channels, and photographs for all 3 team members
+                Tailor credentials, contact channels, and photographs for all {allMembers.length} team members
               </p>
             </div>
           </div>
@@ -170,7 +170,7 @@ export const TeammateCustomizerModal: React.FC = () => {
           <div className="flex items-center gap-2 text-xs">
             <span className="font-serif font-bold text-zinc-900">{currentMember.name}</span>
             <span className="text-zinc-500">•</span>
-            <span className="font-mono text-zinc-600">B.Tech CGPA: {currentMember.scores.btech}</span>
+            <span className="font-mono text-zinc-600">B.Tech CGPA: {currentMember.scores?.btech}</span>
           </div>
           {activeMemberId !== selectedId ? (
             <button
@@ -331,7 +331,7 @@ export const TeammateCustomizerModal: React.FC = () => {
             <input
               type="text"
               name="photo"
-              placeholder="/images/rohit-pass-photo.jpeg or URL"
+              placeholder="/images/rohit-photo.jpeg or URL"
               value={formData.photo}
               onChange={handleInputChange}
               className="w-full px-3 py-2 text-xs bg-zinc-50 border border-zinc-300 rounded-sm focus:outline-none focus:border-zinc-900 focus:bg-white"

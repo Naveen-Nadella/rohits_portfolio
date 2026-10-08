@@ -5,8 +5,8 @@ import { skillsData } from '../../data/skills';
 import { soundEngine } from '../../utils/audio';
 import { Sparkles, Code2, Layout, Cpu, Terminal } from 'lucide-react';
 
-export const Skills: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+export const Skills = () => {
+  const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   const categories = [
     { id: 'ALL', label: 'COMPLETE ARSENAL', code: 'ALL', icon: Sparkles },
@@ -16,7 +16,7 @@ export const Skills: React.FC = () => {
     { id: 'TOOLS', label: 'TOOLS & PLATFORMS', code: '04', icon: Terminal }
   ];
 
-  const handleCategoryChange = (id: string) => {
+  const handleCategoryChange = (id) => {
     soundEngine.playBrushSwipe();
     setSelectedCategory(id);
   };
@@ -106,7 +106,7 @@ export const Skills: React.FC = () => {
                     )}
 
                     <div className="flex items-start justify-between gap-2 mb-2">
-                      <span className="font-serif text-sm sm:text-base font-bold text-zinc-900 group-hover:text-black transition-colors">
+                      <span className="font-serif text-sm sm:base font-bold text-zinc-900 group-hover:text-black transition-colors">
                         {skill.name}
                       </span>
                       <span className="font-mono text-[10px] tracking-wider uppercase text-zinc-800 px-2 py-0.5 rounded-[1px] bg-white border border-zinc-300 whitespace-nowrap shadow-2xs">

@@ -1,11 +1,6 @@
 import React from 'react';
 
-interface ScrollDividerProps {
-  className?: string;
-  symbol?: string;
-}
-
-export const ScrollDivider: React.FC<ScrollDividerProps> = ({
+export const ScrollDivider = ({
   className = '',
   symbol = '◆'
 }) => {

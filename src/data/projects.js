@@ -1,6 +1,4 @@
-﻿import type { Project } from '../types/portfolio';
-
-export const projectsData: Project[] = [
+export const projectsData = [
   {
     id: "chronicle-portfolio",
     title: "Chronicle Portfolio System",
@@ -8,10 +6,10 @@ export const projectsData: Project[] = [
     sealCode: "01",
     category: "Web & Frontend",
     description: "Architected a personal developer showcase featuring interactive HTML5 Canvas particle physics, bespoke monochrome aesthetics, and sub-second load times.",
-    longDescription: "The Chronicle Portfolio System is a modern, editorial personal web application built from the ground up to present engineering projects and academic milestones. Engineered with React 19, TypeScript, Vite, and Tailwind CSS v4, it incorporates interactive physics canvas rendering, smooth scroll-driven sections, accessible design tokens, and modular state management.",
+    longDescription: "The Chronicle Portfolio System is a modern, editorial personal web application built from the ground up to present engineering projects and academic milestones. Engineered with React 19, JavaScript, Vite, and Tailwind CSS v4, it incorporates interactive physics canvas rendering, smooth scroll-driven sections, accessible design tokens, and modular state management.",
     problemSolved: "Standard developer portfolio templates are often bloated, visually generic, and fail to provide recruiters with an engaging, interactive presentation of technical capabilities.",
     architecture: "Modular React 19 component hierarchy bundled with Vite. Styled with Tailwind CSS v4 tokens, powered by Framer Motion micro-interactions and a custom HTML5 Canvas particle system running on requestAnimationFrame.",
-    technologies: ["React 19", "TypeScript", "Tailwind CSS v4", "Vite", "Framer Motion", "HTML5 Canvas", "Responsive Design"],
+    technologies: ["React 19", "JavaScript", "Tailwind CSS v4", "Vite", "Framer Motion", "HTML5 Canvas", "Responsive Design"],
     keyFeatures: [
       "Custom HTML5 Canvas particle engine rendering real-time fluid ink particles at 60 FPS.",
       "Minimalist monochrome design system inspired by classical editorial typography and clean modern lines.",
@@ -21,11 +19,11 @@ export const projectsData: Project[] = [
     ],
     challenges: [
       "Maintaining high-framerate canvas animation performance alongside complex scroll animations.",
-      "Ensuring clean component modularity with strict TypeScript typing without third-party UI library dependencies."
+      "Ensuring clean component modularity without third-party UI library dependencies."
     ],
     solutions: [
       "Throttled canvas render passes and optimized particle memory allocation to sustain 60 FPS.",
-      "Structured strict TypeScript interfaces across personal, skills, and project data models."
+      "Structured clean modular data models across personal, skills, and project data models."
     ],
     metrics: [
       "< 1.0s First Contentful Paint",

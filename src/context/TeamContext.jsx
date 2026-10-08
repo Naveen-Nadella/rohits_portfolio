@@ -1,27 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { TeamMember } from '../types/portfolio';
 import { teamMembersData } from '../data/team';
-
-interface TeamContextType {
-  activeMember: TeamMember;
-  activeMemberId: string;
-  setActiveMemberId: (id: string) => void;
-  allMembers: TeamMember[];
-  updateMember: (id: string, updated: Partial<TeamMember>) => void;
-  isCustomizerOpen: boolean;
-  customizingMemberId: string | null;
-  openCustomizer: (memberId?: string) => void;
-  closeCustomizer: () => void;
-  resetAllMembers: () => void;
-}
 
 const LOCAL_STORAGE_KEY = 'portfolio_team_members_v5';
 const ACTIVE_MEMBER_KEY = 'portfolio_active_member_v5';
 
-const TeamContext = createContext<TeamContextType | undefined>(undefined);
+const TeamContext = createContext(undefined);
 
-export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [members, setMembers] = useState<TeamMember[]>(() => {
+export const TeamProvider = ({ children }) => {
+  const [members, setMembers] = useState(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (saved) {
@@ -29,7 +15,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (Array.isArray(parsed) && parsed.length > 0) {
           // Merge with default dataset so new fields aren't missing
           return teamMembersData.map((def) => {
-            const found = parsed.find((p: TeamMember) => p.id === def.id);
+            const found = parsed.find((p) => p.id === def.id);
             return found ? { ...def, ...found } : def;
           });
         }
@@ -40,7 +26,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return teamMembersData;
   });
 
-  const [activeMemberId, setActiveMemberIdState] = useState<string>(() => {
+  const [activeMemberId, setActiveMemberIdState] = useState(() => {
     try {
       const saved = localStorage.getItem(ACTIVE_MEMBER_KEY);
       if (saved && teamMembersData.some((m) => m.id === saved)) {
@@ -53,7 +39,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
   });
 
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
-  const [customizingMemberId, setCustomizingMemberId] = useState<string | null>(null);
+  const [customizingMemberId, setCustomizingMemberId] = useState(null);
 
   useEffect(() => {
     try {
@@ -63,7 +49,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [members]);
 
-  const setActiveMemberId = (id: string) => {
+  const setActiveMemberId = (id) => {
     setActiveMemberIdState(id);
     try {
       localStorage.setItem(ACTIVE_MEMBER_KEY, id);
@@ -72,7 +58,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const updateMember = (id: string, updated: Partial<TeamMember>) => {
+  const updateMember = (id, updated) => {
     setMembers((prev) =>
       prev.map((m) => {
         if (m.id === id) {
@@ -90,7 +76,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
   };
 
-  const openCustomizer = (memberId?: string) => {
+  const openCustomizer = (memberId) => {
     setCustomizingMemberId(memberId || activeMemberId);
     setIsCustomizerOpen(true);
   };
@@ -131,7 +117,7 @@ export const TeamProvider: React.FC<{ children: React.ReactNode }> = ({ children
   );
 };
 
-export const useTeam = (): TeamContextType => {
+export const useTeam = () => {
   const context = useContext(TeamContext);
   if (!context) {
     throw new Error('useTeam must be used within a TeamProvider');

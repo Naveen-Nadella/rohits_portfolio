@@ -1,6 +1,4 @@
-﻿import type { SkillCategory } from '../types/portfolio';
-
-export const skillsData: SkillCategory[] = [
+export const skillsData = [
   {
     title: "PROGRAMMING LANGUAGES",
     sealCode: "01",

@@ -1,6 +1,4 @@
-import type { TeamMember } from '../types/portfolio';
-
-export const teamMembersData: TeamMember[] = [
+export const teamMembersData = [
   {
     id: 'sanivada-rohith',
     name: 'Sanivada Rohith',

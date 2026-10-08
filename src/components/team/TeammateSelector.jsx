@@ -3,14 +3,14 @@ import { useTeam } from '../../context/TeamContext';
 import { soundEngine } from '../../utils/audio';
 import { ChevronDown, Check, Settings2, Users } from 'lucide-react';
 
-export const TeammateNavbarDropdown: React.FC = () => {
+export const TeammateNavbarDropdown = () => {
   const { activeMember, allMembers, setActiveMemberId, openCustomizer } = useTeam();
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
@@ -18,7 +18,7 @@ export const TeammateNavbarDropdown: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSelect = (id: string) => {
+  const handleSelect = (id) => {
     soundEngine.playBrushSwipe();
     setActiveMemberId(id);
     setIsOpen(false);
@@ -111,7 +111,7 @@ export const TeammateNavbarDropdown: React.FC = () => {
   );
 };
 
-export const TeammateSegmentedBar: React.FC = () => {
+export const TeammateSegmentedBar = () => {
   const { activeMember, allMembers, setActiveMemberId, openCustomizer } = useTeam();
 
   return (

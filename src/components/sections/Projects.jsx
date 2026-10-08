@@ -3,16 +3,15 @@ import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { RedSeal } from '../common/RedSeal';
 import { projectsData } from '../../data/projects';
-import type { Project } from '../../types/portfolio';
 import { ProjectModal } from './ProjectModal';
 import { soundEngine } from '../../utils/audio';
 import { GithubIcon } from '../common/SocialIcons';
 import { ExternalLink, ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
 
-export const Projects: React.FC = () => {
-  const [activeModalProject, setActiveModalProject] = useState<Project | null>(null);
+export const Projects = () => {
+  const [activeModalProject, setActiveModalProject] = useState(null);
 
-  const openProjectModal = (proj: Project) => {
+  const openProjectModal = (proj) => {
     soundEngine.playChime(660, 0.8);
     setActiveModalProject(proj);
   };

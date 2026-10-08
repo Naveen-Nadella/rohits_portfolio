@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react';
-import type { Project } from '../../types/portfolio';
 import { RedSeal } from '../common/RedSeal';
 import { soundEngine } from '../../utils/audio';
 import { GithubIcon } from '../common/SocialIcons';
 import { X, ExternalLink, Shield, Cpu, Activity, CheckCircle, AlertTriangle, Layers } from 'lucide-react';
 
-interface ProjectModalProps {
-  project: Project | null;
-  onClose: () => void;
-}
-
-export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+export const ProjectModal = ({ project, onClose }) => {
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         onClose();
       }

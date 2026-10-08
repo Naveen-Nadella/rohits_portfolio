@@ -1,6 +1,4 @@
-﻿import type { Certification } from '../types/portfolio';
-
-export const certificationsData: Certification[] = [
+export const certificationsData = [
   {
     id: "azure-az900",
     title: "Microsoft Azure Fundamentals (AZ-900)",

@@ -3,9 +3,9 @@ import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { useTeam } from '../../context/TeamContext';
 import { RedSeal } from '../common/RedSeal';
-import { Layout, Code, Database, GitBranch, GraduationCap, Compass, BookOpen, Award, CheckCircle2 } from 'lucide-react';
+import { Layout, Code, Database, GitBranch, GraduationCap, Compass, BookOpen, CheckCircle2 } from 'lucide-react';
 
-export const About: React.FC = () => {
+export const About = () => {
   const { activeMember } = useTeam();
 
   const pillars = [
@@ -13,7 +13,7 @@ export const About: React.FC = () => {
       icon: Layout,
       code: '01',
       title: 'Modern Web Craft',
-      description: 'Engineering responsive, component-driven user interfaces using React.js, TypeScript, and modern utility-first CSS design tokens.'
+      description: 'Engineering responsive, component-driven user interfaces using React.js, modern JavaScript, and refined utility-first styling design tokens.'
     },
     {
       icon: Code,
@@ -213,7 +213,7 @@ export const About: React.FC = () => {
               <div className="grid grid-cols-2 gap-2 text-xs font-mono text-zinc-600">
                 <div className="flex items-center gap-1.5 p-2 bg-zinc-50 rounded-sm border border-zinc-200">
                   <CheckCircle2 size={12} className="text-zinc-900 shrink-0" />
-                  <span className="truncate">React & TypeScript</span>
+                  <span className="truncate">React & Modern JS</span>
                 </div>
                 <div className="flex items-center gap-1.5 p-2 bg-zinc-50 rounded-sm border border-zinc-200">
                   <CheckCircle2 size={12} className="text-zinc-900 shrink-0" />

@@ -5,7 +5,7 @@ import { RedSeal } from '../common/RedSeal';
 import { certificationsData } from '../../data/certifications';
 import { ExternalLink, ShieldCheck, Award } from 'lucide-react';
 
-export const Certifications: React.FC = () => {
+export const Certifications = () => {
   return (
     <section id="certifications" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#F1F1EE]/80 border-y border-zinc-300/40 backdrop-blur-xs">
       <KanjiWatermark char="05" position="top-right" opacity={0.03} />

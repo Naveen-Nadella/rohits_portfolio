@@ -1,30 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
-interface ParticleNode {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  radius: number;
-  color: string;
-  alpha: number;
-}
-
-interface CodeGlyph {
-  text: string;
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  alpha: number;
-  swaySpeed: number;
-  swayOffset: number;
-  swayAmp: number;
-}
-
-export const InkCanvasBackground: React.FC = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+export const InkCanvasBackground = () => {
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -34,7 +11,7 @@ export const InkCanvasBackground: React.FC = () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let animationFrameId: number;
+    let animationFrameId;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
@@ -45,7 +22,7 @@ export const InkCanvasBackground: React.FC = () => {
       active: false
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       mouse.active = true;
@@ -74,7 +51,7 @@ export const InkCanvasBackground: React.FC = () => {
       'npm', 'state', 'λ', 'true', 'interface'
     ];
 
-    const glyphs: CodeGlyph[] = [];
+    const glyphs = [];
     const glyphCount = Math.min(18, Math.max(8, Math.floor(width / 95)));
 
     for (let i = 0; i < glyphCount; i++) {
@@ -94,7 +71,7 @@ export const InkCanvasBackground: React.FC = () => {
 
     // Interactive Constellation Network Nodes
     const nodeCount = Math.min(48, Math.max(22, Math.floor(width / 42)));
-    const nodes: ParticleNode[] = [];
+    const nodes = [];
     const nodeColors = ['#1E293B', '#334155', '#475569', '#64748B'];
 
     for (let i = 0; i < nodeCount; i++) {

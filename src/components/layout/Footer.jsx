@@ -5,7 +5,7 @@ import { soundEngine } from '../../utils/audio';
 import { GithubIcon, LinkedinIcon } from '../common/SocialIcons';
 import { ArrowUp, Mail } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   const { activeMember } = useTeam();
 
   const scrollToTop = () => {
