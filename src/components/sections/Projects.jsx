@@ -3,13 +3,17 @@ import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { RedSeal } from '../common/RedSeal';
 import { projectsData } from '../../data/projects';
+import { useTeam } from '../../context/TeamContext';
 import { ProjectModal } from './ProjectModal';
 import { soundEngine } from '../../utils/audio';
 import { GithubIcon } from '../common/SocialIcons';
 import { ExternalLink, ArrowRight, Sparkles, TrendingUp } from 'lucide-react';
 
 export const Projects = () => {
+  const { activeMember } = useTeam();
   const [activeModalProject, setActiveModalProject] = useState(null);
+
+  const activeProjectsList = activeMember?.projects || projectsData;
 
   const openProjectModal = (proj) => {
     soundEngine.playChime(660, 0.8);
@@ -30,7 +34,7 @@ export const Projects = () => {
 
         {/* Project Cards Grid in Light Theme */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {projectsData.map((project) => (
+          {activeProjectsList.map((project) => (
             <div
               key={project.id}
               className="bg-white border border-zinc-200/90 hover:border-zinc-400 rounded-sm p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group relative overflow-hidden shadow-xs"

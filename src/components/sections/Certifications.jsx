@@ -3,9 +3,13 @@ import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { RedSeal } from '../common/RedSeal';
 import { certificationsData } from '../../data/certifications';
+import { useTeam } from '../../context/TeamContext';
 import { ExternalLink, ShieldCheck, Award } from 'lucide-react';
 
 export const Certifications = () => {
+  const { activeMember } = useTeam();
+  const activeCertsList = activeMember?.certifications || certificationsData;
+
   return (
     <section id="certifications" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-[#F1F1EE]/80 border-y border-zinc-300/40 backdrop-blur-xs">
       <KanjiWatermark char="05" position="top-right" opacity={0.03} />
@@ -19,7 +23,7 @@ export const Certifications = () => {
         />
 
         <div className="max-w-2xl mx-auto">
-          {certificationsData.map((cert) => (
+          {activeCertsList.map((cert) => (
             <div
               key={cert.id}
               className="bg-white border border-zinc-200/90 hover:border-zinc-400 rounded-sm p-6 sm:p-8 flex flex-col justify-between shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md relative overflow-hidden group"

@@ -78,10 +78,81 @@
 }
 
 /* Scroll Bar Hide Helper */
-.no-scrollbar::-webkit-scrollbar {
+.scrollbar-none::-webkit-scrollbar {
   display: none;
 }
-.no-scrollbar {
+.scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ------------------------------------------------------------------ */
+/* THEME OVERRIDES FOR TEMPLATES */
+/* ------------------------------------------------------------------ */
+
+/* 1. Cyberpunk Matrix Theme */
+.dark-cyberpunk-theme {
+  color-scheme: dark;
+}
+.dark-cyberpunk-theme .bg-white {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+.dark-cyberpunk-theme .border-zinc-200,
+.dark-cyberpunk-theme .border-zinc-300 {
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+.dark-cyberpunk-theme .silver-gradient-text {
+  background: linear-gradient(135deg, #00F0FF 0%, #10B981 50%, #A7F3D0 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.dark-cyberpunk-theme .text-zinc-900 {
+  color: #F1F5F9 !important;
+}
+.dark-cyberpunk-theme .text-zinc-600,
+.dark-cyberpunk-theme .text-zinc-700 {
+  color: #94A3B8 !important;
+}
+.dark-cyberpunk-theme .bg-\[\#EDEDE9\]\/92,
+.dark-cyberpunk-theme .bg-\[\#F1F1EE\]\/80 {
+  background-color: rgba(15, 23, 42, 0.95) !important;
+}
+
+/* 2. Modernist SaaS Studio Theme */
+.modern-saas-theme .silver-gradient-text {
+  background: linear-gradient(135deg, #4338CA 0%, #6366F1 50%, #818CF8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* 3. Obsidian Luxe Theme */
+.obsidian-luxe-theme {
+  color-scheme: dark;
+}
+.obsidian-luxe-theme .bg-white {
+  background-color: #141416 !important;
+  color: #F4F4F5 !important;
+  border-color: rgba(217, 119, 6, 0.25) !important;
+}
+.obsidian-luxe-theme .border-zinc-200,
+.obsidian-luxe-theme .border-zinc-300 {
+  border-color: rgba(217, 119, 6, 0.2) !important;
+}
+.obsidian-luxe-theme .silver-gradient-text {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #FBBF24 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.obsidian-luxe-theme .text-zinc-900 {
+  color: #F4F4F5 !important;
+}
+.obsidian-luxe-theme .text-zinc-600,
+.obsidian-luxe-theme .text-zinc-700 {
+  color: #A1A1AA !important;
+}
+.obsidian-luxe-theme .bg-\[\#EDEDE9\]\/92,
+.obsidian-luxe-theme .bg-\[\#F1F1EE\]\/80 {
+  background-color: rgba(20, 20, 22, 0.95) !important;
 }

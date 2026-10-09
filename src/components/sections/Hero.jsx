@@ -2,12 +2,13 @@ import React from 'react';
 import { RedSeal } from '../common/RedSeal';
 import { useTeam } from '../../context/TeamContext';
 import { TeammateSegmentedBar } from '../team/TeammateSelector';
+import { PortfolioSearchBar } from '../portfolio/PortfolioSearchBar';
 import { soundEngine } from '../../utils/audio';
 import { GithubIcon, LinkedinIcon } from '../common/SocialIcons';
-import { Mail, Phone, Award, ArrowUpRight, Code2, Camera } from 'lucide-react';
+import { Mail, Phone, Award, ArrowUpRight, Code2, Camera, Sparkles, Key, FileText } from 'lucide-react';
 
 export const Hero = () => {
-  const { activeMember, openCustomizer } = useTeam();
+  const { activeMember, openCustomizer, openGenerator, openResumeModal } = useTeam();
 
   const handleScrollTo = (id) => {
     soundEngine.playBrushSwipe();
@@ -35,8 +36,13 @@ export const Hero = () => {
       </div>
 
       {/* Top Segmented Teammate Switcher */}
-      <div className="w-full relative z-20 mb-4">
+      <div className="w-full relative z-20 mb-3">
         <TeammateSegmentedBar />
+      </div>
+
+      {/* Prominent Portfolio ID Lookup & Generator Banner */}
+      <div className="w-full relative z-20 mb-8">
+        <PortfolioSearchBar variant="hero" />
       </div>
 
       <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
@@ -51,9 +57,13 @@ export const Hero = () => {
                 {activeMember.university} • B.Tech CGPA {activeMember.scores.btech.replace('CGPA', '').trim()}
               </span>
             </div>
-            <span className="hidden sm:inline-block font-mono text-xs text-zinc-500 tracking-widest uppercase">
-              ARCHIVE // 2026
-            </span>
+
+            {/* Official Portfolio ID Badge */}
+            <div className="flex items-center gap-1.5 px-3 py-1 bg-zinc-900 text-white rounded-sm shadow-2xs">
+              <Key size={11} className="text-zinc-400" />
+              <span className="text-[10px] font-mono tracking-widest text-zinc-400">PORTFOLIO ID:</span>
+              <span className="font-mono text-xs font-bold tracking-wider">{activeMember.id}</span>
+            </div>
           </div>
 
           {/* Subheading Greeting */}
@@ -119,10 +129,31 @@ export const Hero = () => {
             </button>
 
             <button
+              onClick={() => {
+                soundEngine.playClick();
+                openResumeModal();
+              }}
+              className="px-5 py-3 rounded-sm bg-white border border-zinc-300 hover:border-zinc-900 text-zinc-900 font-serif text-xs tracking-widest uppercase font-bold transition-all duration-300 hover:bg-zinc-50 shadow-xs flex items-center gap-2 cursor-pointer group"
+              title="Download candidate resume as PDF"
+            >
+              <FileText size={14} className="text-zinc-700 group-hover:scale-110 transition-transform" />
+              <span>DOWNLOAD RESUME</span>
+            </button>
+
+            <button
               onClick={() => handleScrollTo('about')}
               className="px-5 py-3 rounded-sm border border-zinc-200 hover:border-zinc-400 text-zinc-600 hover:text-zinc-900 font-serif text-xs tracking-widest uppercase transition-all duration-300 bg-white flex items-center gap-2 group cursor-pointer shadow-xs"
             >
               <span>VIEW CHRONICLE</span>
+            </button>
+
+            <button
+              onClick={openGenerator}
+              className="px-5 py-3 rounded-sm bg-zinc-900 hover:bg-black text-white font-serif text-xs tracking-widest uppercase transition-all duration-300 flex items-center gap-2 group cursor-pointer shadow-md"
+              title="Create your portfolio and receive a unique ID"
+            >
+              <Sparkles size={14} className="text-amber-400 group-hover:rotate-12 transition-transform" />
+              <span>+ GENERATE PORTFOLIO</span>
             </button>
           </div>
 

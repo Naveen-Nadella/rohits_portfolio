@@ -3,10 +3,11 @@ import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { useTeam } from '../../context/TeamContext';
 import { RedSeal } from '../common/RedSeal';
-import { Layout, Code, Database, GitBranch, GraduationCap, Compass, BookOpen, CheckCircle2 } from 'lucide-react';
+import { Layout, Code, Database, GitBranch, GraduationCap, Compass, BookOpen, CheckCircle2, FileText } from 'lucide-react';
+import { soundEngine } from '../../utils/audio';
 
 export const About = () => {
-  const { activeMember } = useTeam();
+  const { activeMember, openResumeModal } = useTeam();
 
   const pillars = [
     {
@@ -58,15 +59,26 @@ export const About = () => {
             </div>
 
             <div className="space-y-5 text-base sm:text-lg text-zinc-700 font-editorial leading-relaxed pt-2">
-              <p className="first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-zinc-900 first-letter:mr-2.5 first-letter:float-left first-letter:leading-none">
-                {activeMember.bio[0]}
-              </p>
-              <p className="text-zinc-600">
-                {activeMember.bio[1]}
-              </p>
-              <p className="text-zinc-600">
-                {activeMember.bio[2]}
-              </p>
+              {Array.isArray(activeMember.bio) && activeMember.bio.length > 0 ? (
+                activeMember.bio.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className={
+                      index === 0
+                        ? 'first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-zinc-900 first-letter:mr-2.5 first-letter:float-left first-letter:leading-none'
+                        : 'text-zinc-600'
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p className="first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-zinc-900 first-letter:mr-2.5 first-letter:float-left first-letter:leading-none">
+                  {typeof activeMember.bio === 'string'
+                    ? activeMember.bio
+                    : 'Passionate software engineering undergraduate crafting modern web experiences.'}
+                </p>
+              )}
             </div>
 
             {/* Academic & Professional Inscription Seals */}
@@ -227,6 +239,22 @@ export const About = () => {
                   <CheckCircle2 size={12} className="text-zinc-900 shrink-0" />
                   <span className="truncate">Git Workflows</span>
                 </div>
+              </div>
+
+              {/* Download Resume Button */}
+              <div className="pt-4 border-t border-zinc-200 mt-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    soundEngine.playClick();
+                    openResumeModal();
+                  }}
+                  className="w-full py-2.5 px-3 bg-zinc-900 hover:bg-black text-white rounded-sm text-xs font-serif font-bold tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer shadow-xs transition-colors"
+                  title="Download candidate resume as PDF"
+                >
+                  <FileText size={13} className="text-emerald-400" />
+                  <span>EXPORT OFFICIAL RESUME (PDF)</span>
+                </button>
               </div>
             </div>
           </div>

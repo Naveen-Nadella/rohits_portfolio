@@ -61,6 +61,16 @@ class SoundEngine {
     if (!this.isEnabled) return;
     this.playChime(320, 0.4);
   }
+
+  playClick() {
+    if (!this.isEnabled) return;
+    this.playChime(440, 0.2);
+  }
+
+  playSuccess() {
+    if (!this.isEnabled) return;
+    this.playChime(660, 0.5);
+  }
 }
 
 export const soundEngine = new SoundEngine();

@@ -8,15 +8,17 @@ import { Briefcase, GraduationCap, Calendar, CheckCircle } from 'lucide-react';
 export const Experience = () => {
   const { activeMember } = useTeam();
 
+  const activeExperienceList = activeMember?.experience || experienceData;
+
   const getDynamicGrade = (itemId, defaultGrade) => {
-    if (itemId === 'kl-university-btech') {
-      return `CGPA: ${activeMember.scores.btech}`;
+    if (itemId === 'kl-university-btech' || itemId === 'university-milestone') {
+      return `CGPA: ${activeMember.scores?.btech || '7.5'}`;
     }
-    if (itemId === 'intermediate-xii') {
-      return `Score: ${activeMember.scores.intermediate}`;
+    if (itemId === 'intermediate-xii' || itemId === 'intermediate-milestone') {
+      return `Score: ${activeMember.scores?.intermediate || '900'}`;
     }
-    if (itemId === 'school-tenth') {
-      return `Score: ${activeMember.scores.tenth}`;
+    if (itemId === 'school-tenth' || itemId === 'tenth-milestone') {
+      return `Score: ${activeMember.scores?.tenth || '500'}`;
     }
     return defaultGrade;
   };
@@ -35,7 +37,7 @@ export const Experience = () => {
 
         {/* Central Vertical Spine in Light Theme */}
         <div className="relative border-l-2 border-zinc-300 ml-4 sm:ml-44 pl-6 sm:pl-10 space-y-12">
-          {experienceData.map((item) => {
+          {activeExperienceList.map((item) => {
             const isMilestone = item.type === 'experience';
             const displayGrade = getDynamicGrade(item.id, item.grade);
 

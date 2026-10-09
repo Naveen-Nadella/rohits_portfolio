@@ -3,7 +3,8 @@ import { RedSeal } from '../common/RedSeal';
 import { soundEngine } from '../../utils/audio';
 import { useTeam } from '../../context/TeamContext';
 import { TeammateNavbarDropdown } from '../team/TeammateSelector';
-import { Volume2, VolumeX, Menu, X, Mail } from 'lucide-react';
+import { PortfolioSearchBar } from '../portfolio/PortfolioSearchBar';
+import { Volume2, VolumeX, Menu, X, Mail, Sparkles, FileText } from 'lucide-react';
 
 const navItems = [
   { id: 'hero', label: 'HOME', code: '01' },
@@ -15,8 +16,8 @@ const navItems = [
   { id: 'contact', label: 'CONTACT', code: '07' }
 ];
 
-export const Navbar = () => {
-  const { activeMember } = useTeam();
+export const Navbar = ({ onBackToLanding, onStartCreation }) => {
+  const { activeMember, openGenerator, openResumeModal } = useTeam();
   const [activeSection, setActiveSection] = useState('hero');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -60,66 +61,123 @@ export const Navbar = () => {
     setSoundActive(newState);
   };
 
+  const handleGenerateClick = () => {
+    if (onStartCreation) {
+      onStartCreation();
+    } else {
+      openGenerator();
+    }
+  };
+
   return (
     <>
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'py-2.5 bg-[#EDEDE9]/92 backdrop-blur-md border-b border-zinc-300/80 shadow-xs'
-            : 'py-4 bg-transparent'
+            ? 'py-2 bg-[#EDEDE9]/92 backdrop-blur-md border-b border-zinc-300/80 shadow-xs'
+            : 'py-3.5 bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo / Active Member Seal */}
-          <button
-            onClick={() => handleNavClick('hero')}
-            className="flex items-center gap-3 group text-left cursor-pointer focus:outline-none"
-            aria-label="Scroll to top"
-          >
-            <RedSeal char={activeMember.monogram} size="sm" rotate={false} />
-            <div className="flex flex-col">
-              <span className="font-serif text-sm tracking-widest font-bold text-zinc-900 group-hover:text-zinc-600 transition-colors uppercase">
-                {activeMember.name}
-              </span>
-              <span className="font-mono text-[9px] tracking-wider text-zinc-500 uppercase">
-                KL UNIVERSITY • B.TECH CSE
-              </span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3">
+          {/* Left section: Back to Hub + Member Seal */}
+          <div className="flex items-center gap-2">
+            {onBackToLanding && (
+              <button
+                onClick={onBackToLanding}
+                className="px-2.5 py-1.5 rounded-sm bg-zinc-200/90 hover:bg-zinc-900 hover:text-white text-zinc-800 text-[11px] font-mono uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer shadow-2xs shrink-0 font-bold"
+                title="Return to Onboarding Hub"
+              >
+                <span>← HUB</span>
+              </button>
+            )}
+
+            {/* Logo / Active Member Seal */}
+            <button
+              onClick={() => handleNavClick('hero')}
+              className="flex items-center gap-2.5 group text-left cursor-pointer focus:outline-none shrink-0"
+              aria-label="Scroll to top"
+            >
+              <RedSeal char={activeMember.monogram} size="sm" rotate={false} />
+              <div className="flex flex-col">
+                <span className="font-serif text-xs sm:text-sm tracking-widest font-bold text-zinc-900 group-hover:text-zinc-600 transition-colors uppercase truncate max-w-[140px] sm:max-w-[180px]">
+                  {activeMember.name}
+                </span>
+                <div className="flex items-center gap-1 font-mono text-[9px] tracking-wider text-zinc-500 uppercase">
+                  <span className="bg-zinc-200/90 px-1 py-0.2 rounded-[1px] text-zinc-800 font-bold">
+                    {activeMember.id}
+                  </span>
+                  <span className="hidden md:inline">• KL UNIVERSITY</span>
+                </div>
+              </div>
+            </button>
+          </div>
+
+          {/* Center Search Bar & Nav Links */}
+          <div className="hidden lg:flex items-center gap-2">
+            {/* Desktop Navigation Links */}
+            <nav className="flex items-center gap-1 bg-zinc-200/80 border border-zinc-300/80 rounded-full px-2.5 py-1 backdrop-blur-md">
+              {navItems.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={`relative px-3 py-1 text-xs font-serif tracking-widest uppercase transition-all duration-300 rounded-full flex items-center gap-1 cursor-pointer ${
+                      isActive
+                        ? 'text-zinc-900 font-semibold bg-white border border-zinc-300/80 shadow-xs'
+                        : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/50'
+                    }`}
+                  >
+                    <span className="font-mono text-[10px] opacity-60">{item.code}</span>
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <span className="w-1 h-1 rounded-full bg-zinc-900 inline-block ml-0.5" />
+                    )}
+                  </button>
+                );
+              })}
+            </nav>
+          </div>
+
+          {/* Right Action Section: Search Bar + Teammate Switcher + Generator CTA */}
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Quick Search Bar in Top Navbar */}
+            <div className="hidden md:block">
+              <PortfolioSearchBar variant="navbar" />
             </div>
-          </button>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-zinc-200/80 border border-zinc-300/80 rounded-full px-3 py-1.5 backdrop-blur-md">
-            {navItems.map((item) => {
-              const isActive = activeSection === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`relative px-3.5 py-1 text-xs font-serif tracking-widest uppercase transition-all duration-300 rounded-full flex items-center gap-1.5 cursor-pointer ${
-                    isActive
-                      ? 'text-zinc-900 font-semibold bg-white border border-zinc-300/80 shadow-xs'
-                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/50'
-                  }`}
-                >
-                  <span className="font-mono text-[10px] opacity-60">{item.code}</span>
-                  <span>{item.label}</span>
-                  {isActive && (
-                    <span className="w-1 h-1 rounded-full bg-zinc-900 inline-block ml-0.5" />
-                  )}
-                </button>
-              );
-            })}
-          </nav>
-
-          {/* Right Action Icons & Teammate Selector */}
-          <div className="flex items-center gap-2 sm:gap-3">
             {/* Teammate Switcher Dropdown */}
             <TeammateNavbarDropdown />
+
+            {/* Download Resume / CV Button */}
+            <button
+              onClick={() => {
+                soundEngine.playClick();
+                openResumeModal();
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-zinc-100 text-zinc-900 border border-zinc-300 hover:border-zinc-500 text-xs font-serif font-bold tracking-wider transition-all duration-300 shadow-2xs cursor-pointer shrink-0"
+              title="Download formatted Resume / CV (PDF)"
+            >
+              <FileText size={12} className="text-zinc-700" />
+              <span className="hidden sm:inline">RESUME</span>
+              <span className="sm:hidden">CV</span>
+            </button>
+
+            {/* + Generate Portfolio Button */}
+            <button
+              onClick={handleGenerateClick}
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-zinc-900 hover:bg-black text-white text-xs font-serif font-bold tracking-wider transition-all duration-300 shadow-xs hover:shadow-sm cursor-pointer shrink-0"
+              title="Generate new portfolio & receive an ID"
+            >
+              <Sparkles size={11} className="text-white" />
+              <span className="hidden sm:inline">+ GENERATE</span>
+              <span className="sm:hidden">+ ID</span>
+            </button>
 
             {/* Ambient Chime Audio Toggle */}
             <button
               onClick={toggleSound}
-              className={`p-2 rounded-full border transition-all duration-300 cursor-pointer ${
+              className={`p-2 rounded-full border transition-all duration-300 cursor-pointer hidden sm:flex ${
                 soundActive
                   ? 'border-zinc-900 text-zinc-900 bg-zinc-100'
                   : 'border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-400 bg-white'
@@ -127,16 +185,7 @@ export const Navbar = () => {
               title={soundActive ? 'Ambient Chime Active (Click to Mute)' : 'Enable Ambient Chime'}
               aria-label="Toggle ambient chime"
             >
-              {soundActive ? <Volume2 size={15} /> : <VolumeX size={15} />}
-            </button>
-
-            {/* Quick Contact CTA */}
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-sm bg-zinc-900 hover:bg-black text-white text-xs font-serif tracking-widest font-bold transition-all duration-300 shadow-xs cursor-pointer"
-            >
-              <Mail size={12} className="text-white" />
-              <span>CONTACT</span>
+              {soundActive ? <Volume2 size={14} /> : <VolumeX size={14} />}
             </button>
 
             {/* Mobile Menu Hamburger */}
@@ -153,22 +202,31 @@ export const Navbar = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden bg-white/98 backdrop-blur-xl pt-24 px-6 flex flex-col justify-between pb-8 border-b border-zinc-200 animate-in fade-in duration-300">
+        <div className="fixed inset-0 z-40 lg:hidden bg-white/98 backdrop-blur-xl pt-20 px-5 flex flex-col justify-between pb-6 border-b border-zinc-200 animate-in fade-in duration-300 overflow-y-auto">
           <div className="space-y-3">
-            <div className="pb-3 border-b border-zinc-200 text-xs font-serif tracking-widest text-zinc-500">
+            {/* Mobile Search Bar */}
+            <div className="pb-3 border-b border-zinc-200">
+              <div className="text-[10px] font-mono uppercase text-zinc-500 mb-2">
+                SEARCH BY PORTFOLIO ID
+              </div>
+              <PortfolioSearchBar variant="navbar" className="w-full" />
+            </div>
+
+            <div className="pb-1 text-xs font-serif tracking-widest text-zinc-500">
               DIRECTORY • NAVIGATION
             </div>
+
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`w-full flex items-center justify-between py-3 px-4 rounded-md text-left transition-colors cursor-pointer ${
+                className={`w-full flex items-center justify-between py-2.5 px-3 rounded-md text-left transition-colors cursor-pointer ${
                   activeSection === item.id
                     ? 'bg-zinc-100 border-l-4 border-zinc-900 text-zinc-900 font-bold'
                     : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900'
                 }`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   <span className="font-mono text-xs text-zinc-400">{item.code}</span>
                   <span className="font-serif tracking-wider text-sm">{item.label}</span>
                 </div>
@@ -179,13 +237,35 @@ export const Navbar = () => {
             ))}
           </div>
 
-          <div className="pt-6 border-t border-zinc-200 flex flex-col gap-3">
+          <div className="pt-4 border-t border-zinc-200 flex flex-col gap-2.5">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openResumeModal();
+              }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 bg-white border border-zinc-300 hover:bg-zinc-50 text-zinc-900 font-serif text-xs tracking-wider font-bold rounded-sm cursor-pointer shadow-2xs"
+            >
+              <FileText size={14} className="text-zinc-700" />
+              <span>DOWNLOAD RESUME (PDF)</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openGenerator();
+              }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-900 text-white font-serif text-xs tracking-wider font-bold rounded-sm cursor-pointer shadow-sm"
+            >
+              <Sparkles size={14} />
+              <span>GENERATE NEW PORTFOLIO</span>
+            </button>
+
             <button
               onClick={() => handleNavClick('contact')}
-              className="w-full flex items-center justify-center gap-2 py-3 bg-zinc-900 text-white font-serif text-sm tracking-wider font-bold rounded-sm cursor-pointer shadow-sm"
+              className="w-full flex items-center justify-center gap-2 py-2 bg-zinc-100 border border-zinc-300 text-zinc-900 font-serif text-xs tracking-wider font-bold rounded-sm cursor-pointer"
             >
-              <Mail size={16} />
-              <span>DISPATCH MESSAGE</span>
+              <Mail size={14} />
+              <span>CONTACT {activeMember.name.toUpperCase()}</span>
             </button>
           </div>
         </div>

@@ -1,6 +1,9 @@
 export const teamMembersData = [
   {
-    id: 'sanivada-rohith',
+    id: 'ROHIT-2026',
+    portfolioId: 'ROHIT-2026',
+    aliases: ['sanivada-rohith', 'rohit-2026', 'rohit', 'sanniwada-rohit'],
+    template: 'editorial',
     name: 'Sanivada Rohith',
     monogram: 'SR',
     title: 'Software Engineer & Web Developer',
@@ -27,7 +30,10 @@ export const teamMembersData = [
     ]
   },
   {
-    id: 'shaik-ashraf',
+    id: 'ASHRAF-2026',
+    portfolioId: 'ASHRAF-2026',
+    aliases: ['shaik-ashraf', 'ashraf-2026', 'ashraf'],
+    template: 'cyberpunk',
     name: 'Shaik Ashraf',
     monogram: 'SA',
     title: 'Software Engineer & Full-Stack Developer',
@@ -54,7 +60,10 @@ export const teamMembersData = [
     ]
   },
   {
-    id: 'jai-sai-krishna',
+    id: 'JAISAI-2026',
+    portfolioId: 'JAISAI-2026',
+    aliases: ['jai-sai-krishna', 'jaisai-2026', 'jaisai', 'boyina-jai-sai-krishna'],
+    template: 'minimalist',
     name: 'Boyina Jai Sai Krishna',
     monogram: 'JK',
     title: 'Software Engineer & Backend Developer',

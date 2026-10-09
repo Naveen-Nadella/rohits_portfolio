@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { SectionHeading } from '../common/SectionHeading';
 import { KanjiWatermark } from '../common/KanjiWatermark';
 import { skillsData } from '../../data/skills';
+import { useTeam } from '../../context/TeamContext';
 import { soundEngine } from '../../utils/audio';
 import { Sparkles, Code2, Layout, Cpu, Terminal } from 'lucide-react';
 
 export const Skills = () => {
+  const { activeMember } = useTeam();
   const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   const categories = [
@@ -21,9 +23,11 @@ export const Skills = () => {
     setSelectedCategory(id);
   };
 
+  const activeSkillsList = activeMember?.skills || skillsData;
+
   const filteredCategories = selectedCategory === 'ALL'
-    ? skillsData
-    : skillsData.filter((cat) => {
+    ? activeSkillsList
+    : activeSkillsList.filter((cat) => {
         if (selectedCategory === 'LANGUAGES') return cat.title.includes('LANGUAGES');
         if (selectedCategory === 'FRONTEND') return cat.title.includes('FRONTEND');
         if (selectedCategory === 'CORE_CS') return cat.title.includes('COMPUTER SCIENCE');
